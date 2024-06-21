@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEATHER FORECASTING</title>
+    <link rel="stylesheet" href="weather.css">
+    <script src="Script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+<style>
+      body {
+        background-color: aqua;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .a {
+        background: #5372F0;
+        color: #fff;
+        padding: 18px 0;
+        font-size: 1.75rem;
+        text-align: center;
+        margin: 0;
+        border-radius:25px;
+        
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .weather-input {
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .weather-input input {
+        width: 280px;
+        height: 46px;
+        outline: none;
+        padding: 0 17px;
+        margin: 10px 0 20px 0;
+        font-size: 1.07rem;
+        border-radius: 4px;
+        border: 1px solid black;
+      }
+
+      .weather-input button {
+        width: 300px;
+        color: white;
+        outline: none;
+        padding: 10px 0;
+        cursor: pointer;
+        font-size: 1.07rem;
+        border-radius: 4px;
+        border: 1px solid black;
+        background: blue;
+        margin-bottom: 10px;
+      }
+
+      .location-btn {
+        background: #a73bb1;
+      }
+
+      .current-weather {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        padding: 20px;
+        
+        text-align: center;
+        
+        margin-bottom: 20px;
+      }
+
+      .current-weather h2 {
+        font-size: 28px;
+      }
+
+      .current-weather h4 {
+        font-size: 20px;
+        margin: 5px 0;
+      }
+
+      .icon img {
+        max-width: 70px;
+        margin: -18px 0 -12px 0;
+        background:rgba(255, 99, 71, 0.5)
+        height:300px;
+        width:100px;
+        padding:10px;
+        color:black;
+      }
+
+      .icon h4 {
+        margin-top: -15px;
+        text-transform: capitalize;
+        color:black;
+      }
+
+      .days-forecasting {
+        color: white;
+        text-align: center;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .days-forecasting h2 {
+        font-size: 30px;
+        margin: 20px 0;
+        color:black;
+      }
+
+      .weather-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .card {
+        list-style: none;
+        color: white;
+        background: #6C757D;
+        padding: 18px 16px;
+        border-radius: 5px;
+        width: calc(50% - 10px);
+        text-align: center;
+        box-shadow:5px 5px 5px black;
+      }
+
+      .card h2 {
+        font-size: 18px;
+      }
+
+      .card h4 {
+        font-size: 15px;
+        margin: 2px 0;
+      }
+      .details{
+background:#6C757D;
+width:200px;
+height:300px;
+padding:10px;
+font-size:15px;
+border-radius:5px;
+text-align:center;
+box-shadow:5px 5px 5px black;}
+.b{
+background:rgba(255, 99, 71, 0.5)
+        height:150px;
+        width:50px;
+        padding:10px;}
+        .weather-input .separator{
+height:1px;
+width:450px;
+margin:25px 0;
+background:#bbb;
+display:flex;
+align-items:center;
+justify-content:center;}
+.weather-input .separator::before{
+content:"or";
+color:#6c757D;
+font-size:1.18rem;
+padding:0 15px;
+background:#E3F2FD;}
+.c{
+width:300px;
+height:200px;
+border-radius:5px;}
+#humidityHistogram {
+  max-width: 300px; 
+  max-height: 350px; 
+}
+ .line-chart {
+            max-width: 300px; 
+            max-height: 250px;}
+.bottum{
+background:#FA8072;
+color:black;
+border-radius:10px;
+width:100%;
+height:100px;
+text-align:center;}
+</style>
+ </head>
+ <body>
+ <h1 class="a">WEATHER DASHBOARD</h1>
+ <div class="container">
+  <div class="weather-input">
+  <img class="c" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeho9SBbxCfLbpprDP46xNTiEEjSHYLgbMsQ&usqp=CAU" alt="weather forecasting">
+   <h3>Enter your city name</h3>
+    <input class="city-input" type="text" placeholder="eg. New York, London">
+    <button class="search-btn">Search</button>
+    <div class="separator"></div>
+    <button class="location-btn">Use current location</button>
+    </div>
+    <div class="weather-data">
+    <div class="current-weather">
+    <div class="details">
+    <h2 class="location-date">Your Location (Date)</h2>
+    <h4>Temperature:___<span class="deg">°</span>C</h4>
+    <h4>Wind:__ M/S</h4>
+    <h4>Humidity:__%</h4>
+    <div class="icon">
+    <div class="b">
+     <img src="https://openweathermap.org/img/wn/10d@4x.png" alt="weather-icon">
+    <h4>Moderate Rain</h4>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="days-forecasting">
+    <h2><u>7-Days Forecast</u></h2>
+    <ul class="weather-cards">
+    <li class="card">
+    <h2>Date(____)</h2>
+    <h4>Temp:__<span class="deg">°</span>C</h4>
+    <h4>Wind:__ M/S</h4>
+    <h4>Humidity:__%</h4>
+    </li>
+      <li class="card">
+    <h2>Date(____)</h2>
+    <h4>Temp:__<span class="deg">°</span>C</h4>
+    <h4>Wind:__ M/S</h4>
+    <h4>Humidity:__%</h4>
+    </li>
+     <li class="card">
+    <h2>Date(____)</h2>
+    <h4>Temp:__<span class="deg">°</span>C</h4>
+    <h4>Wind:__ M/S</h4>
+    <h4>Humidity:__%</h4>
+    </li>
+     <li class="card">
+    <h2>Date(____)</h2>
+    <h4>Temp:__<span class="deg">°</span>C</h4>
+    <h4>Wind:__ M/S</h4>
+    <h4>Humidity:__%</h4>
+    </li>
+     <li class="card">
+    <h2>Date(____)</h2>
+    <h4>Temp:__<span class="deg">°</span>C</h4>
+    <h4>Wind:__ M/S</h4>
+    <h4>Humidity:__%</h4>
+    </li>
+     <li class="card">
+    <h2>Date(____)</h2>
+    <h4>Temp:__<span class="deg">°</span>C</h4>
+    <h4>Wind:__ M/S</h4>
+    <h4>Humidity:__%</h4>
+    </li>
+    </ul>
+    <div>
+    </div>
+    </div>
+    <canvas id="humidityHistogram"></canvas>
+    <canvas class="line-chart" id="temperatureLineChart"></canvas>
+    <canvas class="line-chart" id="windLineChart"></canvas>
+ </div>
+ <script>
+    
+    const humidityData = [5, 10, 15, 20, 25, 30, 35, 40, 45];
+    const humidityCtx = document.getElementById("humidityHistogram").getContext("2d");
+    const humidityChart = new Chart(humidityCtx, {
+        type: "bar",
+        data: {
+            labels: ["5%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%"],
+            datasets: [{
+                label: "Humidity",
+                data: humidityData,
+                backgroundColor: "#B22222",
+                borderColor: "black",
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: "Humidity",
+                    },
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: "Frequency",
+                    },
+                },
+            },
+        },
+    });
+</script>
+<script>
+        
+        const temperatureData = [20, 22, 23, 25, 24, 22, 21];
+        const windData = [5, 6, 7, 8, 7, 6, 5];
+
+       
+        const temperatureCtx = document.getElementById("temperatureLineChart").getContext("2d");
+        const temperatureLineChart = new Chart(temperatureCtx, {
+            type: "line",
+            data: {
+                labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
+                datasets: [{
+                    label: "Temperature (°C)",
+                    data: temperatureData,
+                    borderColor: "##FF6347",
+                    backgroundColor: "transparent",
+                    tension: 0.4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Days",
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Temperature (°C)",
+                        },
+                    },
+                },
+            },
+        });
+        const windCtx = document.getElementById("windLineChart").getContext("2d");
+        const windLineChart = new Chart(windCtx, {
+            type: "line",
+            data: {
+                labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
+                datasets: [{
+                    label: "Wind (M/S)",
+                    data: windData,
+                    borderColor: "#FF0000",
+                    backgroundColor: "transparent",
+                    tension: 0.4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Days",
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Wind (M/S)",
+                        },
+                    },
+                },
+            },
+        });
+        </script>
+        <script>
+        const cityInput = document.querySelector(".city-input");
+const searchButton = document.querySelector(".search-btn");
+const locationButton = document.querySelector(".location-btn");
+const currentWeatherDiv = document.querySelector(".current-weather");
+const weatherCardsDiv = document.querySelector(".weather-cards");
+
+const API_KEY = "403b0c3559cf0c1447b14f60dea38ecf";
+
+const createWeatherCard = (cityName, weatherItem, index) => {
+  if (index === 0) {
+    return `
+      <div class="details">
+        <h2>${cityName} (${weatherItem.dt_txt.split(" ")[0]})</h2>
+        <h4>Temperature: ${weatherItem.main.temp.toFixed(2)}<span class="deg">°</span>C</h4>
+        <h4>Wind: ${weatherItem.wind.speed.toFixed(2)} M/S</h4>
+        <h4>Humidity: ${weatherItem.main.humidity}%</h4>
+      </div>
+      <div class="icon">
+        <img src="https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}@4x.png" alt="weather-icon">
+        <h4>${weatherItem.weather[0].description}</h4>
+      </div>
+    `;
+  } else {
+    return `
+      <li class="card">
+        <h2>${weatherItem.dt_txt.split(" ")[0]}</h2>
+        <img src="https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}@2x.png" alt="weather-icon">
+        <h4>Temp: ${(weatherItem.main.temp - 273.15).toFixed(2)}<span class="deg">°</span>C</h4>
+        <h4>Wind: ${weatherItem.wind.speed.toFixed(2)} M/S</h4>
+        <h4>Humidity: ${weatherItem.main.humidity}%</h4>
+      </li>
+    `;
+  }
+};
+
+const getWeatherDetails = (cityName, lat, lon) => {
+  const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+
+  fetch(WEATHER_API_URL)
+    .then((res) => res.json())
+    .then((data) => {
+      const uniqueForecastDays = [];
+
+      const fiveDaysForecast = data.list.filter((forecast) => {
+        const forecastDate = new Date(forecast.dt_txt).getDate();
+        if (!uniqueForecastDays.includes(forecastDate)) {
+          return uniqueForecastDays.push(forecastDate);
+        }
+      });
+
+      cityInput.value = "";
+      currentWeatherDiv.innerHTML = "";
+      weatherCardsDiv.innerHTML = "";
+
+      fiveDaysForecast.forEach((weatherItem, index) => {
+        if (index === 0) {
+          currentWeatherDiv.innerHTML = createWeatherCard(cityName, weatherItem, index);
+        } else {
+          weatherCardsDiv.insertAdjacentHTML("beforeend", createWeatherCard(cityName, weatherItem, index));
+        }
+      });
+    })
+    .catch(() => {
+      alert("An error occurred while fetching the weather data!");
+    });
+};
+
+const getCityCoordinates = () => {
+  const cityName = cityInput.value.trim();
+  if (!cityName) return;
+  const GEOCODING_API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`;
+
+  fetch(GEOCODING_API_URL)
+    .then((res) => res.json())
+    .then((data) => {
+      if (!data.length) return alert(`No coordinates found for ${cityName}`);
+      const { name, lat, lon } = data[0];
+      getWeatherDetails(name, lat, lon);
+    })
+    .catch(() => {
+      alert("An error occurred while fetching the coordinates!");
+    });
+};
+
+const getuserCoordinates = () => {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const { latitude, longitude } = position.coords;
+      getWeatherDetails("Your Location", latitude, longitude);
+    },
+    (error) => {
+      if (error.code === error.PERMISSION_DENIED) {
+        alert("Geolocation request denied. Please reset location permission to grant access again.");
+      }
+    }
+  );
+};
+
+searchButton.addEventListener("click", getCityCoordinates);
+locationButton.addEventListener("click", getuserCoordinates);
+cityInput.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    getCityCoordinates();
+  }
+});
+
+        </script>
+        <div class="bottum">
+                <h1>Designed and Developed By----> <u>DASARI JYOTHI</u></h1>
+            </div>
+</body>
+</html>
+  
+
+  
+ 
+
+
